@@ -9,30 +9,13 @@ import java.util.List;
 
 public class ProductList extends BaseMethods {
 
-    Actions actions;
-
     private By addToBasket = By.className("add-to-basket-button");
     private By prdocutTitle = By.className("prdct-desc-cntnr-name");
-    private By basket = By.className("account-basket");
-    private By basketProductTitle = By.cssSelector("#account-navigation-container > div > div.account-nav-item.basket-preview > div > div > div.slideContainer > ul > li > a > div > p.product > span:nth-child(2)");
+    private By basketBtn = By.className("account-basket");
 
     public ProductList(WebDriver driver){
         super(driver);
     }
-
-    /*public void scrollToThirdPage(){
-        String url = "";
-        while(!url.contains("pi=3")){
-            scrollToPage();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            url = driver.getCurrentUrl();
-        }
-
-    }*/
 
     public void addToBasketFirstProduct(){
         List<WebElement> productList =  driver.findElements(addToBasket);
@@ -45,9 +28,9 @@ public class ProductList extends BaseMethods {
         return title;
     }
 
-    public String getBasketProductTitle(){
-        moveToElement(basket);
-        String productTitle = driver.findElement(basketProductTitle).getAttribute("title");
-        return productTitle;
+
+    public BasketPage clickBasket(){
+        click(basketBtn,5);
+        return new BasketPage(driver);
     }
 }
