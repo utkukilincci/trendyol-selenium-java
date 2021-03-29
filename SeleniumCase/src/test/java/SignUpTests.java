@@ -10,7 +10,7 @@ public class SignUpTests extends BaseTest {
 
     @Test
     public void successfulSignUp(){
-        String expectedText = "Hesabım";
+        String expectedAccountName = "Hesabım";
         TakeMail takeMail = new TakeMail(driver);
         User user = new User();
         user.setEmail(takeMail.takeMail());
@@ -18,7 +18,7 @@ public class SignUpTests extends BaseTest {
         signUpPage.goToSignUpPage();
         HomePage homePage = signUpPage.signUp(user.getEmail(), user.getPassword());
         String accountText =  homePage.getAccountText();
-        Assert.assertEquals(accountText, expectedText);
+        Assert.assertEquals(accountText, expectedAccountName);
     }
 
 }
