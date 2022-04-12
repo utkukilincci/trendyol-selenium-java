@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="selenium-sample-trendyol-ui-test" configfailurepolicy="continue" parallel="methods" thread-count="25">
+    <test name="selenium-sample-trendyol-ui-test">
+        <classes>
+            <class name="AddBasketTests"></class>
+            <class name="SignUpTests"></class>
+        </classes>
+    </test>
+</suite>
