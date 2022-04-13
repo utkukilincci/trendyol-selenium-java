@@ -8,14 +8,13 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.Duration.ofSeconds;
+import static utils.LogUtils.logInfo;
 
 public class BaseMethods {
-
     protected WebDriver driver;
     protected Actions actions;
     protected WebDriverWait wait;
@@ -29,28 +28,36 @@ public class BaseMethods {
         firstTab = driver.getWindowHandle();
     }
 
-    public void click(By byElement) {
-        wait.until(ExpectedConditions.elementToBeClickable(byElement)).click();
+    public void navigateUrl(String url) {
+        driver.get(url);
     }
 
-    public void sendKeys(By byElement, String text) {
-        wait.until(ExpectedConditions.elementToBeClickable(byElement)).sendKeys(text);
+    public void click(By element) {
+        waitToElement(element).click();
     }
 
-    public String getText(By byElement) {
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(byElement)).getText();
+    public void sendKeys(By element, String text) {
+        waitToElement(element).sendKeys(text);
+    }
+
+    public String getText(By element) {
+        return waitToElement(element).getText();
+    }
+
+    public String getAttribute(By element, String attribute) {
+        return waitToElement(element).getAttribute(attribute);
     }
 
     public void moveToElement(WebElement element) {
         actions.moveToElement(element).perform();
     }
 
-    public boolean isElementExist(By byElement) {
-        return driver.findElements(byElement).size() > 0;
+    public boolean isElementExist(By element) {
+        return driver.findElements(element).size() > 0;
     }
 
-    public void waitToElement(By byElement) {
-        wait.until(ExpectedConditions.presenceOfElementLocated(byElement));
+    public WebElement waitToElement(By element) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(element));
     }
 
     public void scrollToPage(){
@@ -69,11 +76,13 @@ public class BaseMethods {
 
         for(WebElement item : elements){
 
+            logInfo(item.getText());
             if (item.getText().contains(name)){
                 return item;
             }
         }
 
+        logInfo("Given text is not exists");
         return null;
     }
 

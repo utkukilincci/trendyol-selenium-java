@@ -1,12 +1,20 @@
 # selenium-sample-project
 
+For run the test with default config -> ``mvn clean test``
+
+Specify browser (chrome, firefox, safari) -> ``mvn clean test -Dbrowser=firefox``
+
+Specify headless mode -> ``mvn clean test -Dbrowser=chrome -Dheadless=true``
+
+You can also run tests in parallel (TestNG) -> ``mvn clean test -Dparallel="methods"``
+
 ## Trendyol UI Automation 
 
 ### Add Basket E2E Test
 
-Scenario: (updated 13.04.2022)
+Scenario:
 
-- Go to the trendyol.com
+- Go to the ``trendyol.com``
 - Go to ``TV & Görüntü & Ses`` sub category in the ``ELEKTRONIK`` category
 - Click first product (after this action, new browser tab will open)
 - Add product to basket and close tab
@@ -15,4 +23,11 @@ Scenario: (updated 13.04.2022)
 
 ### Sign up E2E Test
 
-***this scenario exists but it will be updated***
+Scenario
+
+- Go to the ``10minutemail.net`` and take a mail
+- Go to the ``trendyol.com``
+- Click Sign In button
+- Click Sign Up button
+- Try to sign up with taken mail in first step
+- Check that the email verify modal is visible

@@ -2,35 +2,31 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import static java.time.Duration.ofSeconds;
 
 public class SignUpPage extends BaseMethods {
-
-    private String url = "https://www.trendyol.com/uyelik";
-    private By mailField = By.id("register-email");
-    private By passwordField = By.id("register-password-input");
-    private By submitBtn = By.className("submit");
-    private By componentListBy = By.className("component-list");
-    WebDriverWait wait;
+    private final By SIGN_UP_BUTTON = By.cssSelector(".q-layout .right");
+    private final By MAIL_TEXT_BOX = By.id("register-email");
+    private final By PASSWORD_TEXT_BOX = By.id("register-password-input");
+    private final By SUBMIT_BUTTON = By.className("submit");
+    private final By PERSONAL_DATA_CHECK_BOX = By.cssSelector(".personal-checkbox .ty-check");
+    private final By EMAIL_VERIFY_MODAL = By.cssSelector(".email-verify-modal");
 
     public SignUpPage(WebDriver driver){
         super(driver);
-        wait = new WebDriverWait(super.driver, ofSeconds(5));
     }
 
-    public void goToSignUpPage(){
-        driver.get(url);
+    public void clickSignUpButton() {
+        click(SIGN_UP_BUTTON);
     }
 
-    public HomePage signUp(String mail, String password){
+    public void validSignUp(String mail, String password){
+        sendKeys(MAIL_TEXT_BOX, mail);
+        sendKeys(PASSWORD_TEXT_BOX, password);
+        click(PERSONAL_DATA_CHECK_BOX);
+        click(SUBMIT_BUTTON);
+    }
 
-        sendKeys(mailField, mail);
-        sendKeys(passwordField, password);
-        click(submitBtn);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(componentListBy));
-        return new HomePage(driver);
+    public Boolean isVerifyModalExists() {
+        return isElementExist(EMAIL_VERIFY_MODAL);
     }
 }

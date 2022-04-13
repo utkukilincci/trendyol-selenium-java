@@ -14,16 +14,16 @@ public class AddBasketTests extends BaseTest{
         homePage.goToHomePage();
 
         ProductList productList =  homePage.goToSubCategoryInCategory("ELEKTRONIK", "TV & Görüntü & Ses");
+        String productTitle = productList.getTitleOfFirstProduct();
 
         ProductDetailPage productDetailPage = productList.clickFirstProduct();
         productDetailPage.switchToProductDetailTab();
-        String productTitle = productDetailPage.getProductName();
         productDetailPage.clickAddBasket();
 
         homePage = productDetailPage.closeTheProductDetailPage();
 
         BasketPage basketPage = homePage.goToBasketPage();
-        String productTitleInBasket = basketPage.getProductTitleInBasket();
+        String productTitleInBasket = basketPage.getProductNameInBasket();
 
         assertThat(
                 "When user add product to basket, should be able to see product in basket  ",

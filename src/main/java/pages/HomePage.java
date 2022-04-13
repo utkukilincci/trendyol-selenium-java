@@ -3,12 +3,8 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 public class HomePage extends BaseMethods {
-
-    Actions actions;
-
     private final String HOME_PAGE_URL = "https://www.trendyol.com/";
     private final By HOME_PAGE_POP_UP = By.className("modal-close");
     private final By ACCOUNT_BUTTON = By.className("account-user");
@@ -18,7 +14,6 @@ public class HomePage extends BaseMethods {
 
     public HomePage(WebDriver driver){
         super(driver);
-        actions = new Actions(driver);
     }
 
     public void goToHomePage(){
@@ -31,6 +26,12 @@ public class HomePage extends BaseMethods {
 
     public String getAccountText() {
         return getText(ACCOUNT_BUTTON);
+    }
+
+    public SignUpPage clickAccountButton() {
+        click(ACCOUNT_BUTTON);
+
+        return new SignUpPage(driver);
     }
 
     public ProductList goToSubCategoryInCategory(String categoryName, String subCategory){
