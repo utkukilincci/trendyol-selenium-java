@@ -1,4 +1,4 @@
-# trendyol-selenium-project
+# trendyol-selenium-java
 
 For run the test with default config -> ``mvn clean test``
 
